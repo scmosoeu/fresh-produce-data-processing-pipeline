@@ -9,7 +9,7 @@ channel = connection.channel()
 channel.queue_declare(queue='letterbox')
 
 # Everything needs to go through an exchange
-message = "Hello this is my first message"
+message = "apples"
 
 channel.basic_publish(exchange='', routing_key='letterbox', body=message)
 

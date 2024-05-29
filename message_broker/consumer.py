@@ -1,7 +1,13 @@
 import pika
+import requests
+
 
 def on_message_received(ch, method, properties, body):
-    print(f"received new message: {body}")
+
+    commodity = body.decode('utf-8')
+    response = requests.get(f"http://0.0.0.0:8000/{commodity}")
+
+    print(f"received new message: {response.json()}")
 
 connection = pika.BlockingConnection(
     pika.ConnectionParameters('localhost')
