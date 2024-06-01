@@ -17,7 +17,7 @@ connection = pika.BlockingConnection(
 
 channel = connection.channel()
 
-channel.queue_declare(queue='letterbox')
+channel.queue_declare(queue='letterbox', durable=True)
 
 # Specify that the particular callback function should receive messages from the queue
 channel.basic_consume(queue='letterbox', on_message_callback=on_message_received)
