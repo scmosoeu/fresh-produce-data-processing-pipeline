@@ -4,4 +4,4 @@ Data processing pipeline using the fresh produce api
 ## Architecture diagram
 <br>
 
-![architect diagram](assets/architect.drawio.png)
+<p><img src='assets/architect.drawio.png' alt='Architecture Diagram'/></p>
