@@ -1,4 +1,5 @@
 import pika 
+import requests
 
 
 class RabbitMQBroker:
@@ -7,7 +8,7 @@ class RabbitMQBroker:
 
     Parameters
     -----------
-    hostname: Connection to RabbitMQ
+    hostname: Host connection to RabbitMQ
     routing_key: The queue the message should go to
     exchange: A binding to the message queue. i.e. messages
         are sent through to an exchange
@@ -37,7 +38,7 @@ class RabbitMQBroker:
         msg: message to be submitted in a que
         """
 
-        self._channel.basic_publish(
+        self.channel.basic_publish(
             exchange='',
             routing_key=self.routing_key,
             body=msg,
@@ -47,3 +48,25 @@ class RabbitMQBroker:
         )
 
         self.connection.close()
+
+    
+    def consume_message(self, callback: function) -> None:
+        """
+        Consume the published message
+        """
+
+        # Specify that the particular callback function 
+        # should receive messages from the queue
+        self.channel.basic_consume(
+            queue=self.routing_key, 
+            on_message_callback=callback
+        )
+
+        self.channel.start_consuming()
+    
+    def on_message_received(self, ch, method, properties, body):
+        """
+        Subscribe a callback function to a queue
+        """
+        commodity = body.decode('utf-8')
+        response = requests.get(f"http://0.0.0.0:8000/{commodity}")
