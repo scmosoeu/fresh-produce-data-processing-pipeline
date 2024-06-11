@@ -50,7 +50,7 @@ class RabbitMQBroker:
         self.connection.close()
 
     
-    def consume_message(self, callback: function) -> None:
+    def consume_message(self, callback) -> None:
         """
         Consume the published message
         """
@@ -63,10 +63,3 @@ class RabbitMQBroker:
         )
 
         self.channel.start_consuming()
-    
-    def on_message_received(self, ch, method, properties, body):
-        """
-        Subscribe a callback function to a queue
-        """
-        commodity = body.decode('utf-8')
-        response = requests.get(f"http://0.0.0.0:8000/{commodity}")
