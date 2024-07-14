@@ -4,9 +4,6 @@ import requests
 
 rabbitmq_host = os.getenv('RABBITMQ_HOST')
 rabbitmq_queue = os.getenv('RABBITMQ_QUEUE')
-api_host = os.getenv('API_HOST')
-api_port = os.getenv('API_HOST')
-
 
 def send_message(msg: str) -> dict:
     """
