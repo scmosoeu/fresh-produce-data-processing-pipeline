@@ -5,7 +5,7 @@ import requests
 rabbitmq_host = os.getenv('RABBITMQ_HOST')
 rabbitmq_queue = os.getenv('RABBITMQ_QUEUE')
 api_host = os.getenv('API_HOST')
-api_port = os.getenv('API_HOST')
+api_port = os.getenv('API_PORT')
 
 
 def on_message_received(ch, method, properties, body):
@@ -36,7 +36,7 @@ def retrieve_message() -> dict:
     )
     channel = connection.channel()
 
-    channel.queue_declare(queue=rabbitmq_queue)
+    channel.queue_declare(queue=rabbitmq_queue, durable=True)
 
     # Tell RabbitMQ that the callback function should receive messages
     # from the queue

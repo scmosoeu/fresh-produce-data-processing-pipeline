@@ -1,6 +1,5 @@
 import os
 import pika
-import requests
 
 rabbitmq_host = os.getenv('RABBITMQ_HOST')
 rabbitmq_queue = os.getenv('RABBITMQ_QUEUE')
