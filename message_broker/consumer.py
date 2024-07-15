@@ -52,3 +52,6 @@ def retrieve_message() -> dict:
     channel.start_consuming()
 
     return {"Message": "Success!"}
+
+if __name__ == '__main__':
+    retrieve_message()

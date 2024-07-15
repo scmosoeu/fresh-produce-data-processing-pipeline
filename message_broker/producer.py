@@ -1,3 +1,4 @@
+import argparse
 import os
 import pika
 
@@ -34,3 +35,10 @@ def send_message(msg: str) -> dict:
     connection.close()
 
     return {"Message": f"{msg}"}
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Extract Market Prices')
+    parser.add_argument('commodity', type=str, help='Commodity Name')
+
+    args = parser.parse_args()
+    send_message(msg=args.commodity)
