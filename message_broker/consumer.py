@@ -20,6 +20,8 @@ def on_message_received(ch, method, properties, body):
 
     res = commodity_response.json()
 
+    print(res)
+
 
 def retrieve_message() -> dict:
     """
