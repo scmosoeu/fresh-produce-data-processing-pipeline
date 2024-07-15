@@ -1,6 +1,7 @@
 import os
 import pika
 import requests
+import sys
 
 rabbitmq_host = os.getenv('RABBITMQ_HOST')
 rabbitmq_queue = os.getenv('RABBITMQ_QUEUE')
@@ -51,7 +52,17 @@ def retrieve_message() -> dict:
     # Start consuming messages in a que
     channel.start_consuming()
 
+    connection.close()
+
     return {"Message": "Success!"}
 
 if __name__ == '__main__':
-    retrieve_message()
+    try:
+        retrieve_message()
+    except KeyboardInterrupt:
+        print('Interrupted')
+        try:
+            sys.exit(0)
+        except SystemExit:
+            os._exit(0)
+    
